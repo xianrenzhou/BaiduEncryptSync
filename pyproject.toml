@@ -4,4 +4,14 @@ version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.10"
-dependencies = []
+dependencies = [
+    "flask>=3.1.1",
+    "inotify>=0.2.12",
+    "pycryptodome>=3.23.0",
+    "pyinotify>=0.9.6",
+    "python-dateutil>=2.9.0.post0",
+    "pyyaml>=6.0.2",
+    "requests>=2.32.4",
+    "tqdm>=4.67.1",
+    "urllib3>=2.5.0",
+]
