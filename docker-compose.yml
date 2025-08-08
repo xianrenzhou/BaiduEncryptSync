@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+  baidu-encrypt-sync:
+    build: .
+    container_name: baidu-encrypt-sync
+    network_mode: host  # 使用主机网络模型
+    volumes:
+      - ./config:/app/config  # 持久化配置
+      - ./:/data  # 本地要监控的目录，请修改为实际路径
+    environment:
+      - WATCH_DIR=/data
+      - REMOTE_DIR=/apps/autoSync
+      - ENCRYPT=false
+      - PASSWORD=123456
+      - RECURSIVE=true
+      - MIN_SIZE=0
+      - COOLDOWN=2
+      - UPLOAD_EXISTING=true
+      - WORKERS=3
+      # - FILE_TYPES=.jpg,.png,.pdf  # 可选，要监控的文件类型
+      # - EXCLUDE=*.tmp,~*  # 可选，要排除的文件名模式
+      - EXCLUDE_DIRS=.venv  # 可选，要排除的目录
+      - AUTH_CODE=262f2ecfa42416e8acc97b1a235db12e  # 可选，百度网盘授权码
+    restart: unless-stopped
