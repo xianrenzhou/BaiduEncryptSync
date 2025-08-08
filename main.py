@@ -22,8 +22,9 @@ def get_config() -> dict:
         config = yaml.safe_load(f)
     return config
 
-def get_access_token(config: dict) -> str:
-    auth_code = auth.get_code(config)
+def get_access_token(config: dict, auth_code: str = None) -> str:
+    if auth_code is None:
+        auth_code = auth.get_code(config)
     refresh_token = auth.oauthtoken_authorizationcode(config, auth_code)
     access_token, refresh_token= auth.oauthtoken_refreshtoken(config, refresh_token)
     print("Access Token:", access_token)
@@ -507,6 +508,8 @@ if __name__ == '__main__':
                         help="是否上传监控目录中已存在的文件",default=False)
     parser.add_argument("-w", "--workers", type=int, default=3,
                         help="上传工作线程数，默认为3")
+    parser.add_argument("--auth-code",
+                        help="授权码，用于获取访问令牌")
     
     args = parser.parse_args()
     
@@ -529,11 +532,13 @@ if __name__ == '__main__':
         # 获取配置和访问令牌
         config = get_config()
         access_token = None
-        
+        if args.auth_code:
+            print("使用提供的授权码获取访问令牌...")
+            access_token = get_access_token(config, args.auth_code)
         # 检查配置中是否有必要的令牌信息
-        if config.get('RefreshToken') is None:
+        elif config.get('RefreshToken') is None:
             print("当前配置不包含 RefreshToken，尝试获取新的访问令牌...")
-            access_token = get_access_token(config)
+            access_token = get_access_token(config, args.auth_code)
         elif config.get('AccessToken') is None:
             print("当前配置中没有 AccessToken，尝试使用 RefreshToken 刷新...")
             access_token = refresh_access_token(config)
@@ -550,7 +555,7 @@ if __name__ == '__main__':
         # 验证访问令牌是否有效
         if access_token and not if_accesstoken_valid(access_token):
             print("访问令牌无效，尝试重新获取...")
-            access_token = get_access_token(config)
+            access_token = get_access_token(config, args.auth_code)
             
         
         # 创建多个上传工作线程
