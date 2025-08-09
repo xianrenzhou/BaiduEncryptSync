@@ -21,5 +21,5 @@ services:
       # - FILE_TYPES=.jpg,.png,.pdf  # 可选，要监控的文件类型
       # - EXCLUDE=*.tmp,~*  # 可选，要排除的文件名模式
       - EXCLUDE_DIRS=.venv  # 可选，要排除的目录
-      - AUTH_CODE=262f2ecfa42416e8acc97b1a235db12e  # 可选，百度网盘授权码
+      - AUTH_CODE=  # 可选，百度网盘授权码
     restart: unless-stopped
