@@ -1,7 +1,4 @@
-
-AppID: 119703161
-AppKey: UQiY6HffAYq02pNuW2verpfnHyLYv7FE
-ExpireIn: 1757243235
-
-SecretKey: EUNJP1QV0OcPgJVqhSzw0g9CvAFWsWmQ
-SignKey: N8yGRs@rYpkBN*rB7+rN%rQfICbcyIgK
+AppID:      #百度网盘apiAppID
+AppKey:     #百度网盘AppKey
+SecretKey:  #百度网盘SecretKey
+SignKey:    #百度网盘SignKey
