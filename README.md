@@ -176,6 +176,3 @@ python main.py --help
 
 欢迎提交 Pull Request 或 Issue 来改进项目！
 
-## 💰捐赠
-请我喝奶茶
-![alt text](./assets/images/money.png)
